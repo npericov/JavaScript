@@ -38,7 +38,9 @@ function escogerProductos(){
                     else {
                         alert ('Vuelve cuando quieres, te esperamos :)');
                         }
-                    break;        
+                    break;
+        default:
+            alert ('Opción inválida');        
                 }
             }
 
