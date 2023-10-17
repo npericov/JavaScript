@@ -1,139 +1,115 @@
+const opcionesProductos = [
+  { id: "1", nombre: "Polera", precio: 9000 },
+  { id: "2", nombre: "Polerón", precio: 20000 },
+  { id: "3", nombre: "Bolso", precio: 15000 },
+  { id: "4", nombre: "Monedero", precio: 5000 },
+];
 
-alert('¡Hola te damos la bienvenida a tienda Técnica Taller! \n Por favor ingresa tus datos para comenzar a comprar');
-
+alert(
+  "¡Hola te damos la bienvenida a tienda Técnica Taller! \n Por favor ingresa tus datos para comenzar a comprar"
+);
 
 let User = "nombre";
 let Pass = "1234";
 
-function login(){
-    let access =false;
+function login() {
+  let access = false;
 
-    let userName = prompt ("Ingresa tu nombre de usuario.");
-    while (userName != User){
-        alert("No se encuentra registrado.");
-        userName = prompt ("Ingresa tu nombre de usuario.");
-    }
+  let userName = prompt("Ingresa tu nombre de usuario.");
+  let a = 0;
+  while (userName != User) {
+    alert("No se encuentra registrado.");
+    userName = prompt("Ingresa tu nombre de usuario.");
+  }
 
-    let intentos = 3;
-    for (let i = intentos ; i > 0 ; i--) {
-        let userPass = prompt ("Ingresa tu contraseña para ingresar. Tienes "+i+" intentos.")
-        if (userPass === Pass){
-            alert("Nos alegra tenerte de vuelta :)");
-            access = true;
-            break;
-        }else{
-            alert("Contraseña incorrecta, te quedan "+(i-1)+" intentos.")
-        }
+  let intentos = 3;
+  for (let i = intentos; i > 0; i--) {
+    let userPass = prompt(
+      "Ingresa tu contraseña para ingresar. Tienes " + i + " intentos."
+    );
+    if (userPass === Pass) {
+      alert("Nos alegra tenerte de vuelta :)");
+      access = true;
+      break;
+    } else {
+      alert("Contraseña incorrecta, te quedan " + (i - 1) + " intentos.");
     }
-    return access;
+  }
+  return access;
 }
 if (login()) {
-    
-    menu();
-
-}else{
-    alert("Error en tu contraseña, intenta de nuevo más tarde.")
+  menu();
+} else {
+  alert("Error en tu contraseña, intenta de nuevo más tarde.");
 }
 
 //MENU INICIAL
 
-alert ('Conoce nuestra tienda');
+function menu() {
+  alert("Conoce nuestra tienda");
+  const selectOption = prompt(`    
+        seleccione una opción:
+        1.-ver lista de productos
+        2.-cerrar sesión    
+    `);
 
-const menuOptions = [
-    { numero:"1", nombre:"Ver lista de productos.", function: menuProductos},
-    { numero:"2", nombre:"Cerrar sesión",function: null}
-];
-
-const menu = () => {
-    let options = "";
-    for (const option of menuOptions) {
-        options += `${option.numero} - ${option.nombre} \n`;
-    }
-    const selectOption = prompt (`Selecciona una opción: \n ${options}`)
-    
-    const selection = menuOptions.find(option => option.numero === selectOption);
-
-    if(selection) {
-        
-        if(selection.function) {
-            selection.function();
-        } else {
-            alert (`Seleccionaste: ${selection.nombre}`);
-        }
-        if (selection.numero !== "2") {
-            menu();
-        } else {
-            alert("Vuelve pronto!");
-        }
-    } else {
-        alert('Elegiste una opción inválida. Por favor intenta otra vez.');
-        menu();
-    }
+  if (selectOption == "1") {
+    menuProductos();
+  } else {
+    alert("Se cerro tu sesión, Vuelve pronto!");
+  }
 }
-menu();
+//menu();
 
 // ARRAY DE MOSTRAR PRODUCTOS
 
-const opcionesProductos = [
-    {numero: "1" , nombre: 'Polera', precio: 9000},
-    {numero: "2" , nombre: 'Polerón', precio: 20000},
-    {numero: "3" , nombre: 'Bolso', precio: 15000},
-    {numero: "4" , nombre: 'Monedero', precio: 5000},
-    {numero: "5" , nombre: 'Salir', precio: 0}
-
-];
-
-const menuProductos = ( ) => {
-    let opciones = "";
-        for (const option of opcionesProductos) {
-            opciones += `\n ${option.numero} - ${option.nombre} - ${option.precio}` ;
-        }
-        const seleccionarOpcion = prompt(`Escoga el número del producto que desea comprar : \n ${opciones} `);
-
-        const seleccion = seleccionarOpcion.find (opcion => opcion.numero === seleccionarOpcion);
-
-        if (seleccion) {
-
-            if (seleccion.function) {
-            seleccion.function();
-            } else {
-            alert(`Ya se encuentra en tu carrito: ${seleccion.nombre}`);
-            }
-            if (seleccion.numero !== "5") {
-            menu();
-            } else {
-            alert('Hasta luego, vuelve pronto.');
-            }
-            } 
-            else {
-            alert('Por favor, selecciona una opcion correcta.');
-            menu();
-        }
-    }
-menuProductos();
-
-
-
+function menuProductos() {
+  let mensaje = "Seleccione un número para cada producto o cero para salir \n";
+  let mensajeProductos = "Ya se encuentra en tu carrito";
+  opcionesProductos.forEach((producto) => {
+    mensaje +=
+      producto.id + ".-" + producto.nombre + "=>" + producto.precio + "\n";
+  });
+  let seleccionarOpcion = prompt(mensaje);
+  while (!esNumeroValido(seleccionarOpcion)) {
+    alert("Ingrese un número valido del 1 al 4");
+    seleccionarOpcion = prompt(mensaje);
+  }
+  const busquedaProducto = opcionesProductos.find(
+    (producto) => producto.id === seleccionarOpcion
+  );
+  if (seleccionarOpcion){
+      alert(`Tu producto ya se encuentra en el carrito:
+        ${busquedaProducto.nombre} $${busquedaProducto.precio}
+      `);
+      pagarProductos();
+  }
+}
+function esNumeroValido(n) {
+  return n == "1" || n == "2" || n == "3" || n == "4";
+}
 
 //FUNCIÓN PAGAR
 
-let tarjeta = '343434';
-function pagarProductos(){
-    let pagar = false;
-    let intentos = 3;
-    for(let i =intentos; i > 0 ;i--){
-        let usuario = prompt ('Ingresa el número de tu tarjeta. Recuerda que solo son  ' +i+ ' intentos ');
-        if( usuario === tarjeta){
-            alert('Número de tarjeta correcto / Compra realizada');
-            pagar = true;
-            break;
-        }else {
-            alert('Error. Te quedan  ' + (i-1) +  ' intentos ')
-        }
+
+function pagarProductos() {
+  let tarjeta = "343434";
+  let pagar = false;
+  let intentos = 3;
+  for (let i = intentos; i > 0; i--) {
+    let usuario = prompt(
+      "Ingresa el número de tu tarjeta. Recuerda que solo son  " +
+        i +
+        " intentos "
+    );
+    if (usuario === tarjeta) {
+      alert("Número de tarjeta correcto / Compra realizada");
+      pagar = true;
+      break;
+    } else {
+      alert("Error. Te quedan  " + (i - 1) + " intentos ");
     }
-
+  }
 }
-pagarProductos();
 
-
-alert('Gracias por visitarnos!! Saludos Técnica Taller');
+alert("Gracias por visitarnos!! Saludos Técnica Taller");
