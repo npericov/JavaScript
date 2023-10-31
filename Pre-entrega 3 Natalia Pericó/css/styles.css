@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: #ffffff;
+    font-family: 'Montserrat', sans-serif; }
+    body .contenedor {
+    margin: auto;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    grid-template-rows: 0.2fr 3fr 1fr;
+    grid-auto-columns: 1fr;
+    gap: 1px 1px;
+    grid-auto-flow: row;
+    grid-template-areas: "header header header header" "section-1 section-1 section-1 section-1" "footer footer footer footer"; }
+
+    header {
+        grid-area: header;
+        margin: auto;
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        border-bottom: 1px solid #787c7c; }
+        header .menu {
+            width: 100%;
+            padding: 1.5rem;
+            list-style: none;
+            text-align: center; }
+            header .menu .logo {
+            width: 140px;
+            text-align: left; }
+            header .menu ul {
+            display: flex; }
+            header .menu ul a {
+                padding: 10px;
+                margin: 10px;
+                color: #787c7c;
+                text-decoration: none; }
+                header .menu ul a:hover {
+                color: #0eafa7;
+                border-bottom: 2px solid #0eafa7; }
+            header .menu .iconos {
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end; }
+            header .menu .iconos form {
+            margin-right: 2rem; }
+
+    main h1 {
+        color: #0eafa7;
+        font-size: xx-large;
+        font-family: 'Montserrat', sans-serif;
+        text-align: center; }
+
+        main .aparece {
+            color: #787c7c;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-top: 2rem;
+            animation-duration: 4s;
+            animation-name: aparece;
+            animation-iteration-count: infinite; }
+
+#tienda{
+    display:flex;
+    justify-content: center;
+    
+}
+
+.card{
+    width: 300px;
+    height: auto;
+    margin: 2rem;
+    border: 1px solid gray;
+    box-shadow: 5px 2px 5px #b9b8b8;
+    text-align: center;
+    align-items: center;
+}
+
+button{
+    width: 200px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 2rem;
+    background-color: #0eafa7;
+    border: 1px solid #0eafa7;
+    color: #ffffff; 
+}
